@@ -1,0 +1,27 @@
+#!/bin/bash
+
+SAVED_PWD=$PWD
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+
+reinstall () {
+	folder="$1"
+	if [ ! -d "$folder" ]; then
+		return
+	fi
+
+	cd "$folder"
+	rm -rf venv
+	vv; av; pipir; d;
+	cd ..
+}
+
+
+reinstall "bandit"
