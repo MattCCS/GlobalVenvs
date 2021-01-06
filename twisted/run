@@ -10,19 +10,6 @@ while [ -h "$SOURCE" ]; do
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
+. "$DIR/venv/bin/activate"
+twist "$@"
 
-reinstall () {
-	folder="$1"
-	if [ ! -d "$folder" ]; then
-		return
-	fi
-
-	cd "$folder"
-	rm -rf venv
-	vv; av; pipir; d;
-	cd ..
-}
-
-
-reinstall "bandit"
-reinstall "twisted"
