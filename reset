@@ -34,4 +34,5 @@ reinstall () {
 
 
 reinstall "bandit"
+reinstall "pylint"
 reinstall "twisted"

@@ -11,4 +11,4 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 . "$DIR/venv/bin/activate"
-twist "$@"
+pylint "$@"
