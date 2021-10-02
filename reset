@@ -13,11 +13,10 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # NOTE: Change if you need to.
 PYTHON=python3
-PIP=pip3
 
 vv () { $PYTHON -m venv venv; }
 av () { source venv/bin/activate; }
-pipir () { $PIP install -r requirements.txt; }
+pipir () { python -m pip install -r requirements.txt --quiet; }
 d () { deactivate; }
 
 reinstall () {
@@ -32,12 +31,17 @@ reinstall () {
 	cd ..
 }
 
+echo "[ ] Starting..."
 
-reinstall "bandit"
-reinstall "build"
-reinstall "flake8"
-reinstall "flask"
-reinstall "pylint"
-reinstall "twine"
-reinstall "twisted"
-reinstall "vulture"
+reinstall "bandit"  &
+reinstall "build"   &
+reinstall "flake8"  &
+reinstall "flask"   &
+reinstall "mypy"    &
+reinstall "pylint"  &
+reinstall "twine"   &
+reinstall "twisted" &
+reinstall "vulture" &
+
+wait
+echo "[+] Done."
