@@ -12,7 +12,7 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 
 # NOTE: Change if you need to.
-PYTHON=python3
+PYTHON=${PYTHON:-python3}
 
 vv () { $PYTHON -m venv venv; }
 av () { source venv/bin/activate; }
@@ -20,15 +20,16 @@ pipir () { python -m pip install -r requirements.txt --quiet; }
 d () { deactivate; }
 
 reinstall () {
-	folder="$1"
-	if [ ! -d "$folder" ]; then
-		return
-	fi
+    folder="$1"
+    if [ ! -d "$folder" ]; then
+        return
+    fi
+    echo "[*] Installing $folder"
 
-	cd "$folder"
-	rm -rf venv
-	vv; av; pipir; d;  # create, activate, install, deactivate.
-	cd ..
+    cd "$folder"
+    rm -rf venv
+    vv; av; pipir; d;  # create, activate, install, deactivate.
+    cd ..
 }
 
 echo "[ ] Starting..."
